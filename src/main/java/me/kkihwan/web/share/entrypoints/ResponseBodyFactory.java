@@ -14,4 +14,8 @@ public class ResponseBodyFactory {
     }
 
     // TODO: error() 메소드 구현
+
+    public static <T> ResponseBody<T> failure(int code, String message, String traceId, T data) {
+        return new ResponseBody<>(code, message, traceId, data);
+    }
 }
