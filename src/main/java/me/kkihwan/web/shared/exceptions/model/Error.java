@@ -1,4 +1,4 @@
-package me.kkihwan.web.share.exceptions.model;
+package me.kkihwan.web.shared.exceptions.model;
 
 import lombok.Getter;
 import lombok.ToString;

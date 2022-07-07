@@ -1,4 +1,4 @@
-package me.kkihwan.web.share.entrypoints;
+package me.kkihwan.web.shared.entrypoints;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

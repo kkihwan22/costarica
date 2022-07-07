@@ -1,4 +1,4 @@
-package me.kkihwan.web.share.domain;
+package me.kkihwan.web.shared.domain;
 
 import lombok.Getter;
 import lombok.ToString;

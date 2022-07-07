@@ -1,8 +1,8 @@
-package me.kkihwan.web.share.exceptions;
+package me.kkihwan.web.shared.exceptions;
 
 import lombok.Getter;
 import lombok.ToString;
-import me.kkihwan.web.share.exceptions.model.Error;
+import me.kkihwan.web.shared.exceptions.model.Error;
 
 import java.util.List;
 

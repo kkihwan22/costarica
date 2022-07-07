@@ -2,8 +2,8 @@ package me.kkihwan.web.member.domain;
 
 import lombok.Getter;
 import lombok.ToString;
-import me.kkihwan.web.share.domain.vo.Address;
-import me.kkihwan.web.share.domain.vo.Contact;
+import me.kkihwan.web.shared.domain.vo.Address;
+import me.kkihwan.web.shared.domain.vo.Contact;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,4 +1,4 @@
-package me.kkihwan.web.share.entrypoints;
+package me.kkihwan.web.shared.entrypoints;
 
 import lombok.Getter;
 import lombok.ToString;
