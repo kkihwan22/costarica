@@ -1,4 +1,4 @@
-package me.kkihwan.web.login.applications.model;
+package me.kkihwan.web.login.application.model;
 
 import lombok.Getter;
 import lombok.ToString;
