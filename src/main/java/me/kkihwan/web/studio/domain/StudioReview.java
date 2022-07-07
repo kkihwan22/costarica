@@ -2,12 +2,11 @@ package me.kkihwan.web.studio.domain;
 
 import lombok.Getter;
 import lombok.ToString;
-import me.kkihwan.web.shared.domain.BaseWriteDateTime;
 
 import java.util.List;
 
 @Getter @ToString
-public class StudioReview extends BaseWriteDateTime {
+public class StudioReview {
     private Long id;
     private Studio studio;
     private String title;

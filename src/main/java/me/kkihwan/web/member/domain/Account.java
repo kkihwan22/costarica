@@ -1,4 +1,4 @@
-package me.kkihwan.web.login.domain;
+package me.kkihwan.web.member.domain;
 
 import lombok.Getter;
 import lombok.ToString;

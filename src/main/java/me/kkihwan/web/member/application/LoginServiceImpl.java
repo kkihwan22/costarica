@@ -1,7 +1,7 @@
-package me.kkihwan.web.login.application;
+package me.kkihwan.web.member.application;
 
 import lombok.RequiredArgsConstructor;
-import me.kkihwan.web.login.application.model.LoginParameter;
+import me.kkihwan.web.member.application.model.LoginParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
