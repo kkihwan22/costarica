@@ -15,10 +15,10 @@ public class HealthRestController {
 
     @GetMapping("/_health")
     public ResponseEntity<Map<String,String>> checkHealth() {
-        final HashMap<String, String> responseBody = new HashMap<>();
+        LOG.info("[health] check.");
+        final Map<String, String> responseBody = new HashMap<>();
         responseBody.put("result", "success");
         responseBody.put("service", "costarica-web-service");
-
         return ResponseEntity.ok(responseBody);
     }
 }
