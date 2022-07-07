@@ -22,8 +22,13 @@ public class MessageSourceConfig {
         return messageSource;
     }
 
+    /**
+     * [ 설명 ]
+     * Webflux 에서 locale 설정 시 사용되는 Bean
+     * @return LocaleContextResolver
+     */
     @Bean
-    public LocaleContextResolver localeResolver() {
+    public LocaleContextResolver localeContextResolver() {
         final AcceptHeaderLocaleContextResolver localeContextResolver = new AcceptHeaderLocaleContextResolver();
         localeContextResolver.setDefaultLocale(Locale.KOREA);
         return localeContextResolver;
