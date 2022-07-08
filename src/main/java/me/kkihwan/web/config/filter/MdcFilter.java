@@ -19,11 +19,13 @@ public class MdcFilter extends HttpFilter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        String traceId = generateTraceId();
+        LOG.debug("[{}] START.", traceId);
         try {
-            MDC.put("traceId", generateTraceId());
+            MDC.put("traceId", traceId);
             chain.doFilter(request, response);
         } finally {
-            LOG.debug(" MDC clear.");
+            LOG.debug("[{}] END.", traceId);
             MDC.clear();
         }
     }

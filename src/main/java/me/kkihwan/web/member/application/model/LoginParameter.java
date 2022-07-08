@@ -2,7 +2,7 @@ package me.kkihwan.web.member.application.model;
 
 import lombok.Getter;
 import lombok.ToString;
-import me.kkihwan.web.shared.application.ParameterValidator;
+import me.kkihwan.web.shared.validator.ParameterValidator;
 
 import javax.validation.constraints.NotBlank;
 
