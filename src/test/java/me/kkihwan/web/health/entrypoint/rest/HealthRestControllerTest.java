@@ -1,4 +1,4 @@
-package me.kkihwan.web.health.entrypoints.rest;
+package me.kkihwan.web.health.entrypoint.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;

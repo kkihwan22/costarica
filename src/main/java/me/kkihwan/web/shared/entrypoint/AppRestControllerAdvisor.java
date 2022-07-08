@@ -1,8 +1,8 @@
-package me.kkihwan.web.shared.entrypoints;
+package me.kkihwan.web.shared.entrypoint;
 
-import me.kkihwan.web.shared.exceptions.BusinessException;
-import me.kkihwan.web.shared.exceptions.UnknownException;
-import me.kkihwan.web.shared.exceptions.model.Error;
+import me.kkihwan.web.shared.exception.BusinessException;
+import me.kkihwan.web.shared.exception.UnknownException;
+import me.kkihwan.web.shared.exception.model.Error;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

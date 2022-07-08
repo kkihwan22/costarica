@@ -1,4 +1,4 @@
-package me.kkihwan.web.health.entrypoints.rest;
+package me.kkihwan.web.health.entrypoint.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

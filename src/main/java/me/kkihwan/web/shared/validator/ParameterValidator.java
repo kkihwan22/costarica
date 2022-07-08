@@ -1,4 +1,4 @@
-package me.kkihwan.web.shared.application;
+package me.kkihwan.web.shared.validator;
 
 import lombok.Getter;
 import org.slf4j.Logger;
