@@ -16,4 +16,10 @@ class LoginParameterTest {
         Assertions.assertThrows(ConstraintViolationException.class, () -> new LoginParameter("","TEST1234"));
         Assertions.assertThrows(ConstraintViolationException.class, () -> new LoginParameter("TEST1234",""));
     }
+
+    @Test
+    void violation2Test() {
+        Throwable throwable = assertThrows(ConstraintViolationException.class, () -> new LoginParameter("",""));
+        //assertEquals();
+    }
 }
