@@ -18,5 +18,9 @@
             <level value="INFO"/>
             <appender-ref ref="STDOUT" />
         </logger>
+        <logger name="org.hibernate.type.descriptor.sql" additivity="false">
+            <level value="TRACE"/>
+            <appender-ref ref="STDOUT" />
+        </logger>
     </springProfile>
 </configuration>

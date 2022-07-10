@@ -2,6 +2,16 @@ server:
   port: 8881
 
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/costarica?serverTimezone=Asia/Seoul
+    username: root
+    password: 12345678
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
