@@ -2,15 +2,26 @@ server:
   port: 8881
 
 spring:
+  h2:
+    console:
+      enabled: true
+      path: /costarica
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/costarica?serverTimezone=Asia/Seoul
-    username: root
-    password: 12345678
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:~/me/kkihwan/costarica;AUTO_SERVER=TRUE # JDBC URL
+    username: admin # User Name
+    password: admin # Password
+  #datasource:
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://localhost:3306/costarica?serverTimezone=Asia/Seoul
+    #username: root
+    #password: 12345678
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
   jpa:
+    hibernate:
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
