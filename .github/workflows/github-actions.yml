@@ -5,7 +5,7 @@ name: costarica-api CI/CD
 on:
   push:
     branches:
-      - main
+      ## - main
       - develop
 
 permissions:
