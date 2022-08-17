@@ -5,11 +5,37 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  h2:
-    console:
-      enabled: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(sg5W8W/+XCAXasx3po62bwIbs63fIEENRyhU1JH9AFPJYZkos5yqIQelThxEMvM32aWXVlvDm1N7crmgphKjRcrdZUo/Q0NTSrmn5v0YkxpiaFja/FRBLOmEj+ehTiRlQr8Xw8E1kVZXXqS6oIvK+7FyDItcNy54KoAu3cs/ahixPnosmcGZEkqbho2I+FRbgIlOIQIiB6pUH+bC5OrtsTV3wcPU46hY3m5X0yHofKQHQElBjUO3OtBmV4zjWpKACwbvIh1Oz316cvgP7DwF7Q==)
+    # tinyInt1isBit=false 확인
+    username: ENC(k31nYERmMfe2UC7+oLrtkhN7VZsPD3gY)
+    password: ENC(/raIjRYjBTHDa+SVZzYiDymssHl+PF0J)
+    hikari:
+      auto-commit: false
+      connection-test-query: SELECT 1
+      minimum-idle: 10
+      maximum-pool-size: 50
+      transaction-isolation: TRANSACTION_READ_UNCOMMITTED
+      pool-name: dbpool-costarica
   jpa:
+    hibernate:
+      ddl-auto: validate # validate (운영 시 권장) | update | none | create | create-drop
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy # 내용확인
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy # 내용확인
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+#  /resource 폴더 하위 schema.sql, data.sql 을 실행시킬 것인지 결정
+#  sql:
+#    init:
+#      mode: EMBEDDED
+#  h2:
+#    console:
+#      enabled: true
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
