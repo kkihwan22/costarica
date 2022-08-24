@@ -39,9 +39,11 @@ jobs:
 #      run: ./gradlew test
 
     # Caching dependencies
-    - name: Cache Maven packages
-      uses: actions/cache@v3
+    - uses: actions/cache@v3
       with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: | 
+          ${{ runner.os }}-gradle-
