@@ -29,15 +29,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       shell: bash
-
-    ## gradle build
-    - name: Build with Gradle
-      run: ./gradlew build -x test
-      shell: bash
-
-#    - name: Test with Gradle # test application build
-#      run: ./gradlew test
-
+      
     # Caching dependencies
     - uses: actions/cache@v3
       with:
@@ -47,3 +39,34 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: | 
           ${{ runner.os }}-gradle-
+
+    ## gradle build
+    - name: Build with Gradle
+      run: ./gradlew clean build -x test
+      shell: bash
+
+#    - name: Test with Gradle # test application build
+#      run: ./gradlew test
+
+    # 전송할 파일을 담을 디렉토리 생성
+    - name: Make Directory for deliver
+      run: mkdir deploy
+
+    # Jar 파일 Copy
+    - name: Copy Jar
+      run: cp ./build/libs/*.jar deploy/
+
+    # 압축파일 형태로 전달
+    - name: Make zip file
+      run: zip -r -qq -j costarica-api.zip deploy
+
+    # S3 Bucket으로 copy
+    - name: Deliver to AWS S3
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      run: |
+        aws s3 cp --region ap-northeast-2 costarica-api.zip s3://costarica-deploy/build/costarica-api.zip
+    # Deploy
+    - name: Code Deploy
+      run: aws deploy create-deployment --application-name costarica-deploy --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name deploy-group-dev --s3-location bucket=costarica-deploy,bundleType=zip,key=build/costarica-api.zip
