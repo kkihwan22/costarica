@@ -10,7 +10,7 @@ on:
 
 env:
   AWS_REGION: ap-northeast-2
-  S3_BUCKET_NAME: costarica-deploy/build
+  S3_BUCKET_NAME: costarica-deploy
   CD_APP_NAME: costarica-deploy
   CD_GROUP_NAME: deploy-group-dev
 
@@ -84,7 +84,7 @@ jobs:
           --application-name ${{ env.CD_APP_NAME }} \
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --deployment-group-name ${{ env.CD_GROUP_NAME }} \
-          --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
+          --s3-location bucket=$S3_BUCKET_NAME,key=build/$GITHUB_SHA.zip,bundleType=zip
     
     
     
