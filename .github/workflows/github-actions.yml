@@ -74,7 +74,7 @@ jobs:
         aws deploy push \
           --application-name ${{ env.CD_APP_NAME }} \
           --ignore-hidden-files \
-          --s3-location s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip \
+          --s3-location s3://$S3_BUCKET_NAME/build/$GITHUB_SHA.zip \
           --source .
 
     # S3 upload 후 CodeDeploy 실행
