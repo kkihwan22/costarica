@@ -1,0 +1,9 @@
+### 로그인 (간편회원)
+
+POST {{host}}/public/v1/login
+Content-Type: application/json
+
+{
+  "username": "1041@gmail.com",
+  "password" : "1234"
+}

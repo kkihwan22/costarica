@@ -1,13 +1,11 @@
 package me.kkihwan.web.config;
 
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.web.server.i18n.AcceptHeaderLocaleContextResolver;
-import org.springframework.web.server.i18n.LocaleContextResolver;
+import org.springframework.context.*;
+import org.springframework.context.annotation.*;
+import org.springframework.context.support.*;
+import org.springframework.web.server.i18n.*;
 
-import java.util.Locale;
+import java.util.*;
 
 @Configuration
 public class MessageSourceConfig {

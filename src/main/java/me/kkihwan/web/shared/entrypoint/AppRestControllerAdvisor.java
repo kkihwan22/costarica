@@ -1,17 +1,12 @@
 package me.kkihwan.web.shared.entrypoint;
 
-import me.kkihwan.web.shared.exception.BusinessException;
-import me.kkihwan.web.shared.exception.UnknownException;
-import me.kkihwan.web.shared.exception.model.Error;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import me.kkihwan.web.shared.exception.*;
+import me.kkihwan.web.shared.exception.model.ErrorBodyData;
+import org.slf4j.*;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * TODO
@@ -26,25 +21,25 @@ public class AppRestControllerAdvisor {
     private final Logger LOG = LoggerFactory.getLogger(AppRestControllerAdvisor.class);
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ResponseBody<List<Error>>> handleBusinessException(RuntimeException e) {
+    public ResponseEntity<Body<List<ErrorBodyData>>> handleBusinessException(RuntimeException e) {
         BusinessException exception = (BusinessException) e;
         LOG.error("[ error ] point : {}", e.getClass().getSimpleName());
         LOG.error("[ error ] reason : {}", e);
 
-        List<Error> errors = Optional.ofNullable(exception.getErrors()).orElse(Collections.emptyList());
+        List<ErrorBodyData> errorBodyData = Optional.ofNullable(exception.getErrorBodyData()).orElse(Collections.emptyList());
         return ResponseEntity.badRequest()
-                .body(ResponseBodyFactory.failure(
-                        exception.getCode(), exception.getMessage(), "", errors));
+                .body(BodyFactory.failure(
+                        exception.getCode(), exception.getMessage(), "", errorBodyData));
     }
 
     @ExceptionHandler(UnknownException.class)
-    public ResponseEntity<ResponseBody<Void>> handleUnknownException(RuntimeException e) {
+    public ResponseEntity<Body<Void>> handleUnknownException(RuntimeException e) {
         UnknownException exception = (UnknownException) e;
         LOG.error("[ error ] point : {}", e.getClass().getSimpleName());
         LOG.error("[ error ] reason : {}", e);
 
         return ResponseEntity.badRequest()
-                .body(ResponseBodyFactory.failure(
+                .body(BodyFactory.failure(
                         exception.getCode(), exception.getMessage(), "", null));
     }
 }

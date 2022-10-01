@@ -1,0 +1,10 @@
+### 회원가입
+
+POST {{host}}/public/v1/members
+Content-Type: application/json
+
+{
+  "nickname": "user11111",
+  "email": "1041@gmail.com",
+  "password": "1234"
+}

@@ -1,25 +1,63 @@
 package me.kkihwan.web.member.domain;
 
-import lombok.Getter;
-import lombok.ToString;
-import me.kkihwan.web.shared.domain.vo.Address;
-import me.kkihwan.web.shared.domain.vo.Contact;
+import lombok.*;
+import me.kkihwan.web.member.domain.converter.*;
+import me.kkihwan.web.shared.domain.*;
+import org.hibernate.annotations.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.*;
 
-@Getter @ToString
-public class Member {
+import static javax.persistence.GenerationType.*;
+
+@NoArgsConstructor
+@Entity
+@Table(name = "member")
+@DynamicInsert
+@DynamicUpdate
+@Getter @ToString(exclude = "roles")
+public class Member extends BaseDateTime {
+
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private List<MemberRole> roles;
-    private String name;
+
+    @Column(name = "nickname")
     private String nickname;
+
+    @Column(name = "email")
     private String email;
-    private Contact contact;
-    private Address address;
-    private String profileImageUrl;
-    private String snsLinks;
-    private Long updatedBy;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+
+    @Column(name = "password")
+    private String password;
+
+    @Convert(converter = MemberStatusConverter.class)
+    @Column(name = "status")
+    private MemberStatus status;
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberRole> roles;
+
+    public Member(Long id, String email, String password, String nickname, MemberStatus status) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.status = status;
+    }
+
+    public void addRole(MemberRole role) {
+        if (roles == null) {
+            roles = new ArrayList<>();
+        }
+        roles.add(role);
+        role.setMember(this);
+    }
+
+    public void removeRole(MemberRole role) {
+        roles.remove(role);
+        role.setMember(null);
+    }
 }

@@ -1,8 +1,8 @@
 package me.kkihwan.web;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.boot.*;
+import org.springframework.boot.autoconfigure.*;
+import org.springframework.boot.web.servlet.*;
 
 @SpringBootApplication @ServletComponentScan
 public class CostaricaApplication {

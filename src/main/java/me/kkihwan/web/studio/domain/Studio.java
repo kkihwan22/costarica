@@ -1,10 +1,9 @@
 package me.kkihwan.web.studio.domain;
 
-import lombok.Getter;
-import lombok.ToString;
-import me.kkihwan.web.shared.domain.vo.Contact;
+import lombok.*;
+import me.kkihwan.web.shared.domain.vo.*;
 
-import java.util.List;
+import java.util.*;
 
 @Getter @ToString
 public class Studio {

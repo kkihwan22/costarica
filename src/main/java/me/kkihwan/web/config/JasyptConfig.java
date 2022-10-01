@@ -1,11 +1,10 @@
 package me.kkihwan.web.config;
 
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
-import org.jasypt.encryption.StringEncryptor;
-import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
-import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import com.ulisesbocchio.jasyptspringboot.annotation.*;
+import org.jasypt.encryption.*;
+import org.jasypt.encryption.pbe.*;
+import org.jasypt.encryption.pbe.config.*;
+import org.springframework.context.annotation.*;
 
 @Configuration
 @EnableEncryptableProperties

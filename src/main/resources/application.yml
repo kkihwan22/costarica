@@ -5,6 +5,8 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  jackson:
+    property-naming-strategy: SNAKE_CASE
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ENC(sg5W8W/+XCAXasx3po62bwIbs63fIEENRyhU1JH9AFPJYZkos5yqIQelThxEMvM32aWXVlvDm1N7crmgphKjRcrdZUo/Q0NTSrmn5v0YkxpiaFja/FRBLOmEj+ehTiRlQr8Xw8E1kVZXXqS6oIvK+7FyDItcNy54KoAu3cs/ahixPnosmcGZEkqbho2I+FRbgIlOIQIiB6pUH+bC5OrtsTV3wcPU46hY3m5X0yHofKQHQElBjUO3OtBmV4zjWpKACwbvIh1Oz316cvgP7DwF7Q==)

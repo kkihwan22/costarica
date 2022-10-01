@@ -1,10 +1,8 @@
 package me.kkihwan.web.shared.support;
 
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.request.*;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.*;
 
 public class ContextHolderSupport {
     public static HttpServletRequest getHttpServletRequest() {

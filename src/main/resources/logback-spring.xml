@@ -21,5 +21,10 @@
             <appender-ref ref="STDOUT" />
         </logger>
 
+        <logger name="hibernate" additivity="false">
+            <level value="DEBUG"/>
+            <appender-ref ref="STDOUT" />
+        </logger>
+
     </springProfile>
 </configuration>

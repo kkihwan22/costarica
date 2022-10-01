@@ -1,12 +1,10 @@
 package me.kkihwan.web.shared.domain.vo;
 
-import lombok.Getter;
-import lombok.ToString;
-import me.kkihwan.web.member.domain.vo.TelecomCompany;
+import lombok.*;
 
 @Getter @ToString
 public class Contact {
-    private TelecomCompany telecomCompany;
+    // private TelecomCompany telecomCompany;
     private String mobileNumber;
     private String phoneNumber;
 }

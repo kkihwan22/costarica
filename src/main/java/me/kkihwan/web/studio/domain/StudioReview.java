@@ -1,9 +1,8 @@
 package me.kkihwan.web.studio.domain;
 
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
-import java.util.List;
+import java.util.*;
 
 @Getter @ToString
 public class StudioReview {

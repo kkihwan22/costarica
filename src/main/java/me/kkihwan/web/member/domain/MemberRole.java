@@ -1,16 +1,39 @@
 package me.kkihwan.web.member.domain;
 
-import lombok.Getter;
-import lombok.ToString;
-import me.kkihwan.web.member.domain.vo.RoleCode;
+import lombok.*;
+import me.kkihwan.web.member.domain.converter.*;
+import me.kkihwan.web.shared.domain.*;
+import org.hibernate.annotations.*;
 
-import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.*;
 
-@Getter @ToString
-public class MemberRole {
+import static javax.persistence.GenerationType.*;
+
+@NoArgsConstructor
+@Entity
+@Table(name = "member_role")
+@DynamicInsert
+@DynamicUpdate
+@Getter @ToString(exclude = {"member"})
+public class MemberRole extends BaseDateTime {
+
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    @Setter
     private Member member;
-    private RoleCode roleCode;
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
+
+    @Convert(converter = MemberRoleCodeConverter.class)
+    @Column(name = "code_name")
+    private MemberRoleCode codeName;
+
+    public MemberRole(Long id, MemberRoleCode codeName) {
+        this.id = id;
+        this.codeName = codeName;
+    }
 }

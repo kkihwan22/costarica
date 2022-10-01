@@ -1,12 +1,15 @@
 package me.kkihwan.web.shared.domain;
 
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.time.*;
 
-@Getter @ToString
-public abstract class BaseDateTime {
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+@MappedSuperclass
+@ToString
+public abstract class BaseDateTime extends BaseCreatedDateTime {
+
+    @Column(name = "updated_dt")
+    @Getter
+    private LocalDateTime updatedDateTime;
 }

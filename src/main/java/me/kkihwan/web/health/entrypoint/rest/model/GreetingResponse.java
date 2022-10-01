@@ -1,7 +1,6 @@
 package me.kkihwan.web.health.entrypoint.rest.model;
 
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter @ToString
 public class GreetingResponse {
