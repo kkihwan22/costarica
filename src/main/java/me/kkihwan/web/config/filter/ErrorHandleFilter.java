@@ -1,19 +1,25 @@
 package me.kkihwan.web.config.filter;
 
 
-import com.fasterxml.jackson.databind.*;
-import me.kkihwan.web.config.security.exception.*;
+import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import me.kkihwan.web.config.security.exception.SecurityErrorCode;
+import me.kkihwan.web.config.security.exception.UnauthorizedException;
 import me.kkihwan.web.shared.entrypoint.*;
-import org.slf4j.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
-import org.springframework.web.filter.*;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.*;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.*;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 public class ErrorHandleFilter extends OncePerRequestFilter {
     private final Logger log = LoggerFactory.getLogger(ErrorHandleFilter.class);
@@ -28,9 +34,9 @@ public class ErrorHandleFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (TokenExpiredException e) {
             logger.info("토큰의 유효기간이 만료되었습니다.");
-            this.writeValue(response, UNAUTHORIZED, SecurityErrorCode.EXPIRED_TOKEN);
+            this.writeValue(response, UNAUTHORIZED, SecurityErrorCode.EXPIRED_ACCESS_TOKEN);
 
-        } catch (UnauthorizationException e) {
+        } catch (UnauthorizedException e) {
             logger.info("유효하지 않는 토큰입니다. 원인 -[{}]", e);
             this.writeValue(response, UNAUTHORIZED, SecurityErrorCode.INVALID_TOKEN);
 

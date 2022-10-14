@@ -2,7 +2,7 @@ package me.kkihwan.web.config.security;
 
 import lombok.RequiredArgsConstructor;
 import me.kkihwan.web.config.security.exception.InvalidTokenException;
-import me.kkihwan.web.config.security.exception.NotExistTokenException;
+import me.kkihwan.web.config.security.exception.TokenNotExistException;
 import me.kkihwan.web.member.domain.Token;
 import me.kkihwan.web.member.domain.TokenType;
 import me.kkihwan.web.member.domain.TokenVerified;
@@ -39,7 +39,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
         String authorizationHeader = Optional
                 .ofNullable(request.getHeader(AUTHORIZATION))
-                .orElseThrow(NotExistTokenException::new);
+                .orElseThrow(TokenNotExistException::new);
 
         if (!authorizationHeader.startsWith("Bearer ")) {
             throw new InvalidTokenException();

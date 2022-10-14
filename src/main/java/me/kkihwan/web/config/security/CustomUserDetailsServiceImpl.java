@@ -1,14 +1,16 @@
 package me.kkihwan.web.config.security;
 
-import lombok.*;
-import me.kkihwan.web.member.domain.*;
-import org.slf4j.*;
-import org.springframework.security.core.authority.*;
+import lombok.RequiredArgsConstructor;
+import me.kkihwan.web.member.domain.Member;
+import me.kkihwan.web.member.domain.MemberJpaRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
-import org.springframework.security.crypto.bcrypt.*;
-import org.springframework.stereotype.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.*;
 import java.util.*;
 import java.util.stream.*;
 
@@ -17,8 +19,7 @@ import java.util.stream.*;
 public class CustomUserDetailsServiceImpl implements UserDetailsService {
     private final Logger log = LoggerFactory.getLogger(CustomUserDetailsServiceImpl.class);
     private final MemberJpaRepository memberJpaRepository;
-    @Transactional
-    @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member findMember = memberJpaRepository
                 .findByUserDetails(username)
@@ -30,11 +31,11 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
         log.debug("find member: {}", findMember);
         log.debug("roles: {}", findMember.getRoles());
 
-        Collection<SimpleGrantedAuthority> authorities = findMember.getRoles()
+        Set<SimpleGrantedAuthority> authorities = findMember.getRoles()
                 .stream()
                 .map(role -> new SimpleGrantedAuthority(role.getCodeName().name()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
-        return new User(findMember.getEmail(), new BCryptPasswordEncoder().encode(findMember.getPassword()), authorities);
+        return new CustomUserDetails(findMember.getId(), findMember.getNickname(), findMember.getEmail(), new BCryptPasswordEncoder().encode(findMember.getPassword()), authorities);
     }
 }

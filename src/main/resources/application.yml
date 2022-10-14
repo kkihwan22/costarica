@@ -41,3 +41,12 @@ spring:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
+
+logging:
+  level:
+    root: info
+    today.creame: debug
+    org.springframework: warn
+    org.springframework.web: warn
+    org.hibernate: debug
+    springfox: info

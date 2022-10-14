@@ -22,8 +22,12 @@ public class MemberToken extends BaseDateTime {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Column(name = "member_id")
-    private Long memberId;
+//    @Column(name = "member_id")
+//    private Long memberId;
+
+    @ManyToOne(targetEntity = Member.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Column(name = "refresh_token")
     private String refreshToken;
