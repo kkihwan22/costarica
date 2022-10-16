@@ -58,13 +58,10 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
             throws IOException {
         CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
 
-        String username = user.getUsername();
-        Set<SimpleGrantedAuthority> authorities = user.getAuthorities();
-
-        Token refresh = TokenType.REFRESH_TOKEN.factory(username, authorities);
+        Token refresh = TokenType.REFRESH_TOKEN.factory(user);
         log.info("[ refresh token ] {}", refresh);
 
-        Token access = TokenType.ACCESS_TOKEN.factory(username, authorities);
+        Token access = TokenType.ACCESS_TOKEN.factory(user);
         log.info("[ access token ] {}", access);
 
 

@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -32,32 +33,39 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         log.debug("[ filter ] execute authorization filter.");
 
-        if (request.getServletPath().startsWith("/public")) {
+        if (request.getServletPath().startsWith("/public")
+                || request.getServletPath().startsWith("/_health")
+                || request.getServletPath().startsWith("/swagger-ui")
+                || request.getServletPath().startsWith("/v3/api-docs/")
+        ) {
             filterChain.doFilter(request, response);
-            return;
+        } else {
+            String authorizationHeader = Optional
+                    .ofNullable(request.getHeader(AUTHORIZATION))
+                    .orElseThrow(TokenNotExistException::new);
+
+            if (!authorizationHeader.startsWith("Bearer ")) {
+                throw new InvalidTokenException();
+            }
+
+            String key = authorizationHeader.substring("Bearer ".length());
+            Token requestToken = new Token(key, TokenType.ACCESS_TOKEN);
+
+            TokenVerified verify = requestToken.verify();
+
+            if (!verify.isVerified()) {
+                log.info("token invalid. value:{}", key);
+                throw new InvalidTokenException();
+            }
+
+            UserDetails userDetails = verify.getUserDetails();
+            log.debug("[ UserDetails ] {}", (CustomUserDetails) userDetails);
+
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+
+            filterChain.doFilter(request, response);
         }
-
-        String authorizationHeader = Optional
-                .ofNullable(request.getHeader(AUTHORIZATION))
-                .orElseThrow(TokenNotExistException::new);
-
-        if (!authorizationHeader.startsWith("Bearer ")) {
-            throw new InvalidTokenException();
-        }
-
-        String key = authorizationHeader.substring("Bearer ".length());
-        Token requestToken = new Token(key, TokenType.ACCESS_TOKEN);
-
-        TokenVerified verify = requestToken.verify();
-
-        if (!verify.isVerified()) {
-            log.info("token invalid. value:{}", key);
-            throw new InvalidTokenException();
-        }
-
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(verify.getUsername(), null, verify.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-
-        filterChain.doFilter(request, response);
     }
 }

@@ -1,6 +1,7 @@
 package me.kkihwan.web.member.application;
 
 import lombok.RequiredArgsConstructor;
+import me.kkihwan.web.config.security.CustomUserDetails;
 import me.kkihwan.web.config.security.exception.TokenNotExistException;
 import me.kkihwan.web.member.application.model.RefreshTokenParameter;
 import me.kkihwan.web.member.domain.*;
@@ -46,7 +47,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .map(role -> new SimpleGrantedAuthority(role.getCodeName().name()))
                 .collect(Collectors.toSet());
 
-        Token accessToken = TokenType.ACCESS_TOKEN.factory(member.getEmail(), authorities);
+        Token accessToken = TokenType.ACCESS_TOKEN.factory(
+                new CustomUserDetails(member.getId(), member.getNickname(), member.getEmail(), "", authorities)
+        );
 
         log.debug("new access token: {}", accessToken);
         return accessToken.getValue();

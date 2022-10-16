@@ -2,6 +2,7 @@ package me.kkihwan.web.member.domain;
 
 import lombok.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
@@ -18,7 +19,7 @@ public enum TokenType {
         this.expireTime = expireTime;
     }
 
-    public Token factory(String username, Set<SimpleGrantedAuthority> authorities) {
-        return Token.build(this, username, authorities);
+    public Token factory(UserDetails userDetails) {
+        return Token.build(this, userDetails);
     }
 }
