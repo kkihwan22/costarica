@@ -22,7 +22,7 @@ spring:
       pool-name: dbpool-costarica
   jpa:
     hibernate:
-      ddl-auto: validate # validate (운영 시 권장) | update | none | create | create-drop
+      ddl-auto: none # validate (운영 시 권장) | update | none | create | create-drop
       naming:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy # 내용확인
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy # 내용확인
