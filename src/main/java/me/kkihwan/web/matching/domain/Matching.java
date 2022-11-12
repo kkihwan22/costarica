@@ -14,12 +14,11 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "matching")
 @DynamicInsert
 @DynamicUpdate
-@Builder
 @Getter @ToString()
 public class Matching extends BaseDateTime {
 

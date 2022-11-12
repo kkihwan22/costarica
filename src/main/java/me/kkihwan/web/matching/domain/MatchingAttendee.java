@@ -1,6 +1,9 @@
 package me.kkihwan.web.matching.domain;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import me.kkihwan.web.matching.domain.converter.MatchingAttendStatusConverter;
 import me.kkihwan.web.matching.domain.converter.MatchingRoleConverter;
 import me.kkihwan.web.member.domain.Member;
@@ -13,12 +16,11 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "matching_attendee")
 @DynamicInsert
 @DynamicUpdate
-@Builder
 @Getter @ToString()
 public class MatchingAttendee extends BaseDateTime {
 
