@@ -1,6 +1,9 @@
 package me.kkihwan.web.matching.domain;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import me.kkihwan.web.matching.domain.converter.MatchingStatusConverter;
 import me.kkihwan.web.shared.domain.BaseDateTime;
 import me.kkihwan.web.shared.domain.vo.Address;
@@ -9,7 +12,6 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -42,29 +44,23 @@ public class Matching extends BaseDateTime {
     @Column(name = "end_at")
     private LocalDateTime endDateTime;
 
-    @Builder.Default
     @Column(name = "min_photographer_cnt")
-    private Integer minPhotographerCnt = 0;
+    private int minPhotographerCnt;
 
     @Column(name = "max_photographer_cnt")
-    @Builder.Default
-    private Integer maxPhotographerCount = 0;
+    private int maxPhotographerCount;
 
-    @Builder.Default
     @Column(name = "min_cosplayer_count")
-    private Integer minCosplayerCount = 0;
+    private int minCosplayerCount;
 
-    @Builder.Default
     @Column(name = "max_cosplayer_cnt")
-    private Integer maxCosplayerCount = 0;
+    private int maxCosplayerCount;
 
-    @Builder.Default
     @Column(name = "applied_photographer_cnt")
-    private Integer appliedPhotographerCount = 0;
+    private int appliedPhotographerCount;
 
-    @Builder.Default
     @Column(name = "applied_cosplayer_count")
-    private Integer appliedCosplayerCount = 0;
+    private int appliedCosplayerCount;
 
     @Embedded
     @AttributeOverrides({
@@ -74,11 +70,9 @@ public class Matching extends BaseDateTime {
             @AttributeOverride(name = "postalCode", column = @Column(name = "postal_code")),
             @AttributeOverride(name = "detail", column = @Column(name = "detail")),
     })
-    @Builder.Default
-    private Address address = new Address();
+    private Address address;
 
-    @Builder.Default
     @OneToMany(mappedBy = "matching")
-    private List<MatchingAttendee> attendees = new ArrayList<>();
+    private List<MatchingAttendee> attendees;
 
 }
