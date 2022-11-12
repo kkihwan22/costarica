@@ -37,11 +37,11 @@ public class Matching extends BaseDateTime {
     @Column(name = "status")
     private MatchingStatus status;
 
-    @Column(name = "start_date_time")
-    private LocalDateTime startDatetime;
+    @Column(name = "start_at")
+    private LocalDateTime startDateTime;
 
-    @Column(name = "end_date_time")
-    private LocalDateTime endDatetime;
+    @Column(name = "end_at")
+    private LocalDateTime endDateTime;
 
     @Builder.Default
     @Column(name = "min_photographer_cnt")
