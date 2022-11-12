@@ -3,6 +3,7 @@ package me.kkihwan.web.matching.domain;
 import lombok.*;
 import me.kkihwan.web.matching.domain.converter.MatchingStatusConverter;
 import me.kkihwan.web.shared.domain.BaseDateTime;
+import me.kkihwan.web.shared.domain.vo.Address;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -66,7 +67,16 @@ public class Matching extends BaseDateTime {
     @Column(name = "applied_cosplayer_count")
     private Integer appliedCosplayerCount = 0;
 
-    //TODO : 시/군/구 주소 추가예정
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "si", column = @Column(name = "si")),
+            @AttributeOverride(name = "gun", column = @Column(name = "gun")),
+            @AttributeOverride(name = "gu", column = @Column(name = "gu")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "postal_code")),
+            @AttributeOverride(name = "detail", column = @Column(name = "detail")),
+    })
+    @Builder.Default
+    private Address address = new Address();
 
     @Builder.Default
     @OneToMany(mappedBy = "matching")

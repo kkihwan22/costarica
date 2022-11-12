@@ -1,6 +1,8 @@
 package me.kkihwan.web.matching.domain;
 
 import lombok.*;
+import me.kkihwan.web.matching.domain.converter.MatchingAttendStatusConverter;
+import me.kkihwan.web.matching.domain.converter.MatchingRoleConverter;
 import me.kkihwan.web.member.domain.Member;
 import me.kkihwan.web.shared.domain.BaseDateTime;
 import org.hibernate.annotations.DynamicInsert;
@@ -31,5 +33,13 @@ public class MatchingAttendee extends BaseDateTime {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "matching_id")
     private Matching matching;
+
+    @Convert(converter = MatchingRoleConverter.class)
+    @Column(name = "role")
+    private MatchingRole role;
+
+    @Convert(converter = MatchingAttendStatusConverter.class)
+    @Column(name = "status")
+    private MatchingAttendStatus status;
 
 }

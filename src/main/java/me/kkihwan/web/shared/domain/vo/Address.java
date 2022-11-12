@@ -2,10 +2,17 @@ package me.kkihwan.web.shared.domain.vo;
 
 import lombok.*;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
+@NoArgsConstructor @AllArgsConstructor
+@Builder
 @Getter @ToString
 public class Address {
-    private String postCode;
-    private String city;
+    //TODO : 시/군/구 코드 도입도 고려해보자
+    private String si;
+    private String gun;
+    private String gu;
+    private String postalCode;
     private String detail;
-    // TODO: 네이버 or 구글 지도 연동 어떻게 하는지 확인
 }
