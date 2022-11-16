@@ -7,11 +7,12 @@ import lombok.ToString;
 import me.kkihwan.web.matching.domain.converter.MatchingStatusConverter;
 import me.kkihwan.web.shared.domain.BaseDateTime;
 import me.kkihwan.web.shared.domain.vo.Address;
+import me.kkihwan.web.shared.domain.vo.Capacity;
+import me.kkihwan.web.shared.domain.vo.Period;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -38,28 +39,31 @@ public class Matching extends BaseDateTime {
     @Column(name = "status")
     private MatchingStatus status;
 
-    @Column(name = "start_at")
-    private LocalDateTime startDateTime;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "from", column = @Column(name = "start_at")),
+            @AttributeOverride(name = "to", column = @Column(name = "end_at")),
+    })
+    private Period period;
 
-    @Column(name = "end_at")
-    private LocalDateTime endDateTime;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "min", column = @Column(name = "min_photographer_cnt")),
+            @AttributeOverride(name = "max", column = @Column(name = "max_photographer_cnt")),
+    })
+    private Capacity photographerCapacity;
 
-    @Column(name = "min_photographer_cnt")
-    private int minPhotographerCnt;
-
-    @Column(name = "max_photographer_cnt")
-    private int maxPhotographerCount;
-
-    @Column(name = "min_cosplayer_count")
-    private int minCosplayerCount;
-
-    @Column(name = "max_cosplayer_cnt")
-    private int maxCosplayerCount;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "min", column = @Column(name = "min_cosplayer_cnt")),
+            @AttributeOverride(name = "max", column = @Column(name = "max_cosplayer_cnt")),
+    })
+    private Capacity cosplayerCapacity;
 
     @Column(name = "applied_photographer_cnt")
     private int appliedPhotographerCount;
 
-    @Column(name = "applied_cosplayer_count")
+    @Column(name = "applied_cosplayer_cnt")
     private int appliedCosplayerCount;
 
     @Embedded
