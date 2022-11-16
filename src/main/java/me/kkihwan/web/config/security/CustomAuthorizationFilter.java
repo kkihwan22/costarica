@@ -34,6 +34,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
         log.debug("[ filter ] execute authorization filter.");
 
         if (request.getServletPath().startsWith("/public")
+                || request.getServletPath().startsWith("/pages")
                 || request.getServletPath().startsWith("/_health")
                 || request.getServletPath().startsWith("/swagger-ui")
                 || request.getServletPath().startsWith("/v3/api-docs/")

@@ -4,6 +4,7 @@ import lombok.*;
 import me.kkihwan.web.config.filter.*;
 import me.kkihwan.web.config.security.*;
 import org.slf4j.*;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.*;
 import org.springframework.http.*;
 import org.springframework.security.authentication.*;
@@ -32,6 +33,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(creameUserDetailsServiceImpl).passwordEncoder(passwordEncoder());
         super.configure(auth);
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
     @Override
